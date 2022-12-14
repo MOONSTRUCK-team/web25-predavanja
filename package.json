@@ -36,5 +36,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@chakra-ui/icons": "^2.0.13",
+    "ethers": "^5.7.2"
   }
 }
