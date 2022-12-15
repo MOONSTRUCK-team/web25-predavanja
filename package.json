@@ -39,6 +39,8 @@
   },
   "devDependencies": {
     "@chakra-ui/icons": "^2.0.13",
+    "aws-sdk": "^2.1275.0",
+    "axios": "^1.2.1",
     "ethers": "^5.7.2"
   }
 }
