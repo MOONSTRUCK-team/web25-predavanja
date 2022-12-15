@@ -14,5 +14,8 @@ export const Logo = props => {
     ? undefined
     : `${spin} infinite 20s linear`;
 
-  return <Image boxSize={50} animation={animation} src={logo} {...props} />;
+  return <Image 
+            boxSize={{ base: 10, md: 50}} 
+            animation={animation}
+            src={logo} {...props} />;
 };

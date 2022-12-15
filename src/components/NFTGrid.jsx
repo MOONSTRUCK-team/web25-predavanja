@@ -3,7 +3,7 @@ import { useState } from "react";
 import NFTCard from "./NFTCard";
 import NFTDetailsModal from "./NFTDetailModal";
 
-import testData from './testData.json';
+import testData from '../test/testData';
 
 export default function NFTGrid() {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -16,11 +16,11 @@ export default function NFTGrid() {
 
     return (
         <SimpleGrid
+            alignItems='center'
             pt={100}
             px={10}
             spacing={10}
-            minChildWidth={300}
-            >
+            minChildWidth={300}>
             {
             testData.map((item) => 
                 <NFTCard

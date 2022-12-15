@@ -24,17 +24,17 @@ export default function Header({isConnected, isConnenting, address}) {
                 gap={2}>
                 <Logo/>
                 <Button
-                    size='lg'
+                    size={{ base: 'md', md: 'md', lg: 'lg'}}
                     leftIcon={<AddIcon/>}
                     onClick={onOpenCreateNFT}>Create NFT</Button>
                 <Button
-                    size='lg'
+                    size={{ base: 'md', md: 'md', lg: 'lg'}}
                     leftIcon={<ViewIcon/>}>My Gallery</Button>
             </HStack>
             <Spacer/>
-            <HStack>
+            <HStack g={0}>
                 <ColorModeSwitcher/>
-                <Text fontSize='large'>
+                <Text fontSize='large' boxSize={{base: 0}}>
                     {
                         address ? `Connected to ${address}` : ""
                     }
@@ -42,7 +42,7 @@ export default function Header({isConnected, isConnenting, address}) {
                 <Button
                     isLoading={isConnenting}
                     loadingText="Loading"
-                    size='lg'
+                    size={{ base: 'md', md: 'md', lg: 'lg'}}
                     leftIcon={<LinkIcon/>}>
                         {
                             isConnected ? "Connected" : "Connect"

@@ -13,9 +13,10 @@ export default function NFTDetailsModal({isOpen, onClose, data}) {
             <ModalHeader/>
             <ModalCloseButton/>
             <Image
+                maxH={500}
                 src={data.imageURL}
                 p={5}
-                borderRadius='lg'>
+                borderRadius='3xl'>
             </Image>
             <VStack mb={10} gap={2}>
                 <Heading size='lg'>NFT ID {data.tokenId}</Heading>

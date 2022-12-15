@@ -2,20 +2,13 @@ import React, { useEffect, useState } from 'react';
 import {
   ChakraProvider,
   Box,
-  VStack,
-  Grid,
   theme,
-  Button,
   useToast
 } from '@chakra-ui/react';
 
-import {
-  LinkIcon
-} from '@chakra-ui/icons';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import ProviderWrapper from './ProviderWrapper';
-import Header from './Header';
-import NFTGrid from './NFTGrid';
+import ProviderWrapper from './services/ProviderWrapper';
+import Header from './components/Header';
+import NFTGrid from './components/NFTGrid';
 
 function App() {
   const [connected, setConnected] = useState(false);
