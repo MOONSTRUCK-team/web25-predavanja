@@ -1,46 +1,40 @@
 const {ethers} = require('ethers');
-const abi = require('./CounterABI.json');
+const abi = require('./AkademijaNFT.json');
 
+// TODO Look for best way to retrieve all tokenIDs for one user
 export default class ContractWrapper {
 
     constructor(signer) {
-        this.contract = new ethers.Contract('0x8d7A5Ba28F17c576C6cD4F87926A82B7a98967F0', abi, signer);
-    }
-
-    async retrieveCountValue() {
-        try {
-            return (await this.contract.count()).toNumber();
-        } catch (error) {
-            console.error(error);
-            return -1;
-        }
-    }
-
-    async inclement(onSuccess, onError) {
-        try {
-            const trxResponse = await this.contract.add(1);
-            onSuccess('Transaction send!');
-            this.contract.provider.once(trxResponse.hash, () => {
-                onSuccess('Transaction minted!');
-            })
-        } catch(error) {
-            onError(error);
-        }
-    }
-
-    async declement(onSuccess, onError) {
-        try {
-            const trxResponse = await this.contract.substract(1);
-            onSuccess('Transaction send!');
-            this.contract.provider.once(trxResponse.hash, () => {
-                onSuccess('Transaction minted!');
-            })
-        } catch(error) {
-            onError(error);
-        }
+        this.contract = new ethers.Contract('0xd9145CCE52D386f254917e481eB44e9943F39138', abi, signer);
     }
 
     getAddress() {
         return this.contract.address;
+    }
+
+    async getTokenCount() {
+        return (await this.contract.tokenCount()).toNumber();
+    }
+
+    async getTokenOwner(tokenId) {
+        return (await this.contract.ownerOf(tokenId));
+    }
+
+    async getTokenURI(tokenId) {
+        return (await this.contract.tokenURI(tokenId));
+    }
+
+    async mint(cid, onSuccess, onError) {
+        try {
+            const trxResponse = await this.contract.mint(cid);
+            onSuccess('Mint transaction send!');
+            this.contract.provider.once(trxResponse.hash, () => {
+                this.getTokenCount().then((tokenId) => {
+                    onSuccess('Token minted!', tokenId, cid);
+                });
+            })
+        } catch(error) {
+            onError(error);
+        }
     }
 }
