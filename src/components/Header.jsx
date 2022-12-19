@@ -9,7 +9,7 @@ function shrinkAddress(address) {
     return address.substring(0,6) + '...' + address.substring(38,42);
 }
 
-export default function Header({ onCreateNFT, isMinting, isConnected, isConnecting, onConnect, address }) {
+export default function Header({ onCreateNFT, isMinting, isConnected, isConnecting, onConnectClicked, address }) {
     const { 
         isOpen: isOpenCreateNFT,
         onOpen: onOpenCreateNFT,
@@ -31,7 +31,7 @@ export default function Header({ onCreateNFT, isMinting, isConnected, isConnecti
                     loadingText="Minting..."
                     size={{ base: 'md', md: 'md', lg: 'lg'}}
                     leftIcon={<AddIcon/>}
-                    disabled={!isConnected}
+                    disabled={!isConnected || isMinting}
                     onClick={onOpenCreateNFT}>Create NFT</Button>
                 <Button
                     size={{ base: 'md', md: 'md', lg: 'lg'}}
@@ -51,7 +51,8 @@ export default function Header({ onCreateNFT, isMinting, isConnected, isConnecti
                     loadingText="Loading..."
                     size={{ base: 'md', md: 'md', lg: 'lg'}}
                     leftIcon={<LinkIcon/>}
-                    onClick={onConnect}>
+                    disabled={isConnected}
+                    onClick={onConnectClicked}>
                         {
                             isConnected ? "Connected" : "Connect"
                         }

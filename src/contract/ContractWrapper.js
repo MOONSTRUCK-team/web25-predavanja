@@ -1,11 +1,14 @@
 const {ethers} = require('ethers');
 const abi = require('./AkademijaNFT.json');
 
-// TODO Look for best way to retrieve all tokenIDs for one user
 export default class ContractWrapper {
 
     constructor(provider) {
-        this.contract = new ethers.Contract('0xd9145CCE52D386f254917e481eB44e9943F39138', abi, provider);
+        this.contract = new ethers.Contract(
+            '0x400A128e52aa79a67F7e8b39116Dfd292Ca059A9',
+            abi,
+            provider
+        );
     }
 
     getAddress() {
