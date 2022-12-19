@@ -17,7 +17,7 @@ function App() {
 
   const toast = useToast({ duration: 3000, isClosable: true });
   const providerWrapper = new ProviderWrapper(onAccountsChanged);
-  const contractWrapper = new ContractWrapper(providerWrapper.getSigner());
+  const contractWrapper = new ContractWrapper(providerWrapper.provider);
 
   const [connected, setConnected] = useState(false);
   const [connecting, setConnecting] = useState(false);
