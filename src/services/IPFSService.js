@@ -28,5 +28,6 @@ export async function uploadJSON(name, jsonData, onUploaded) {
 }
 
 export async function getMetadata(url) {
-    return axios.get(url);
+    const response = await axios.get(url);
+    return response.data;
 }
