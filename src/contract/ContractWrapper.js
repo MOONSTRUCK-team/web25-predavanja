@@ -24,17 +24,24 @@ export default class ContractWrapper {
         return (await this.contract.tokenURI(tokenId));
     }
 
+    async getTokenDetails(tokenId) {
+        return (await this.contract.getTokenDetails(tokenId));
+    }
+
+    // cid - Content identifier of file uploaded to IPFS
+    // onSuccess(message, isMinted)
+    // onError(message)
     async mint(cid, onSuccess, onError) {
         try {
             const trxResponse = await this.contract.mint(cid);
-            onSuccess('Mint transaction send!');
+            onSuccess('Mint transaction send!', false);
             this.contract.provider.once(trxResponse.hash, () => {
                 this.getTokenCount().then((tokenId) => {
-                    onSuccess('Token minted!', tokenId, cid);
+                    onSuccess(`Token with ID ${tokenId} minted!`, true);
                 });
             })
         } catch(error) {
-            onError(error);
+            onError(error.message);
         }
     }
 }

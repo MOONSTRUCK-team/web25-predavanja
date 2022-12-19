@@ -1,4 +1,5 @@
 import { S3 } from 'aws-sdk';
+import axios from 'axios';
 
 const s3 = new S3({
     // DONT HOLD THESE ON FRONTEND
@@ -9,23 +10,23 @@ const s3 = new S3({
     signatureVersion: 'v4',
 });
 
-export default async function uploadJSON(jsonData) {
-    const params = {
+export async function uploadJSON(name, jsonData, onUploaded) {
+    
+    const request = s3.putObject({
         Bucket: 'web25bucket',
-        Key: 'ipfs-file',
+        Key: name,
         Body: JSON.stringify(jsonData),
         ContentType: 'application/json; charset=utf-8'
-    };
-    
-    const request = s3.putObject(params);
-    request.on('complete', (response) => {
-        // CID
-        console.log(response.httpResponse.headers['x-amz-meta-cid']);
     });
 
-    request.on('error', (error) => {
-        console.error(error);
-    });
+     // Returns CID trough response headers
+    request.on('httpHeaders', (_, headers) => {
+        onUploaded(headers['x-amz-meta-cid']);
+    })
 
     request.send();
+}
+
+export async function getMetadata(url) {
+    return axios.get(url);
 }

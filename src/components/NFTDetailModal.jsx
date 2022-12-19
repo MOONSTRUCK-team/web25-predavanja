@@ -3,7 +3,8 @@ import CustomOverlay from "./CustomOverlay";
 
 export default function NFTDetailsModal({isOpen, onClose, data}) {
     return(
-        <Modal 
+        <Modal
+            size='2xl'
             isOpen={isOpen}
             onClose={onClose}
             isCentered

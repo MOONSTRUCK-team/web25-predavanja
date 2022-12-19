@@ -23,6 +23,11 @@ contract AkademijaNFT is ERC721URIStorage {
         _setTokenURI(tokenId, cid);
     }
 
+    function getTokenDetails(uint256 tokenId) external view returns (address owner, string memory uri) {
+        _requireMinted(tokenId);
+        return (ownerOf(tokenId), tokenURI(tokenId));
+    }
+
     function _baseURI() internal view virtual override returns (string memory) {
         // Link to dedicated gateway for web2.5 course
         return "https://web25dapp.myfilebase.com/ipfs/";
